@@ -1,0 +1,57 @@
+# audit_session.log — eco-air-backend
+# Estudiante ID: 908407
+# Este archivo debe completarse con la salida real de tu terminal.
+# Puedes generarlo automaticamente con el comando:
+#   script audit_session.log   (Linux/macOS/WSL2)
+# O copiando y pegando manualmente cada comando y su salida.
+#
+# Estructura sugerida:
+# ============================================================
+
+=== RETO 1: BUILD ===
+$ docker build --build-arg STUDENT_ID="908407" -t eco-air-backend:1.0.0 .
+[pegar salida aqui]
+
+=== RETO 2.1: HISTORY ===
+$ docker history --human --format "table {{.Size}}\t{{.CreatedBy}}" eco-air-backend:1.0.0
+[pegar salida aqui]
+
+=== RETO 2.2: RUN + TOP ===
+$ docker run -d --name eco_air_active -p 8080:8080 eco-air-backend:1.0.0
+[pegar salida aqui]
+
+$ docker top eco_air_active -o pid,user,comm
+[pegar salida aqui]
+
+=== RETO 2.3: PENETRATION TEST ===
+$ docker exec eco_air_active touch /etc/crontab_fake
+[pegar salida aqui]
+
+=== RETO 2.4: ARTEFACTOS DE DESARROLLO ===
+$ docker exec eco_air_active which mvn
+[pegar salida aqui]
+
+$ docker exec eco_air_active find / -name "*.java" 2>/dev/null
+[pegar salida aqui]
+
+=== RETO 3.1: OOMKILLED ===
+$ docker run -d --name eco_air_crash -m 48m eco-air-backend:1.0.0
+[pegar salida aqui]
+
+$ docker inspect eco_air_crash --format='Status: {{.State.Status}} | ExitCode: {{.State.ExitCode}} | OOMKilled: {{.State.OOMKilled}}'
+[pegar salida aqui]
+
+=== RETO 3.2: LOGS ARRANQUE ===
+$ docker logs --timestamps eco_air_active | grep "Started EcoAirApplication"
+[pegar salida aqui]
+
+=== RETO 3.3: STATS ===
+$ docker stats --no-stream eco_air_active
+[pegar salida aqui]
+
+=== TABLA DE IDENTIDAD ===
+$ docker inspect --format='{{.Id}}' eco-air-backend:1.0.0
+[pegar salida aqui]
+
+$ docker exec eco_air_active env | grep OPERATOR_ID
+[pegar salida aqui]
